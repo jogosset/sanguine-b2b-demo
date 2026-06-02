@@ -1,0 +1,345 @@
+/* ============================================================
+   Sanguine Product Teaser
+   ============================================================ */
+
+.sanguine-product-teaser {
+  --spt-navy: #06038d;
+  --spt-orange: #ea6e40;
+  --spt-red: #da291c;
+}
+
+/* ============================================================
+   Section header
+   ============================================================ */
+
+.sanguine-product-teaser .spt-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-big);
+}
+
+.sanguine-product-teaser .spt-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--spt-navy);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--spacing-xxsmall);
+  line-height: 1.2;
+}
+
+.sanguine-product-teaser .spt-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-neutral-600);
+  margin: 0;
+}
+
+.sanguine-product-teaser .spt-view-all {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--spt-navy);
+  border: 1.5px solid var(--spt-navy);
+  border-radius: var(--shape-border-radius-2);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.sanguine-product-teaser .spt-view-all:hover {
+  background: rgb(6 3 141 / 6%);
+}
+
+/* ============================================================
+   Filter bar
+   ============================================================ */
+
+.sanguine-product-teaser .spt-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+  margin-bottom: var(--spacing-big);
+}
+
+.sanguine-product-teaser .spt-filter-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-neutral-600);
+  margin-right: var(--spacing-xxsmall);
+}
+
+.sanguine-product-teaser .spt-filter {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 6px var(--spacing-small);
+  border: 1.5px solid var(--color-neutral-300);
+  border-radius: 100px;
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-700);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.sanguine-product-teaser .spt-filter:hover {
+  border-color: var(--spt-orange);
+  color: var(--spt-orange);
+}
+
+.sanguine-product-teaser .spt-filter.active {
+  border-color: var(--spt-orange);
+  color: var(--spt-orange);
+  font-weight: 600;
+  background: rgb(234 110 64 / 5%);
+}
+
+/* ============================================================
+   Product grid
+   ============================================================ */
+
+.sanguine-product-teaser .spt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-medium);
+}
+
+@media (min-width: 600px) {
+  .sanguine-product-teaser .spt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .sanguine-product-teaser .spt-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   Product card
+   ============================================================ */
+
+.sanguine-product-teaser .spt-card {
+  background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.sanguine-product-teaser .spt-card:hover {
+  box-shadow: 0 12px 32px rgb(11 22 41 / 10%);
+  transform: translateY(-3px);
+  border-color: #cdd7e5;
+}
+
+/* ============================================================
+   Card image area — per-position gradient backgrounds
+   ============================================================ */
+
+.sanguine-product-teaser .spt-card-img {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--color-neutral-200);
+}
+
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(1) .spt-card-img {
+  background: linear-gradient(135deg, #e8f0f8, #d0e4f0);
+}
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(2) .spt-card-img {
+  background: linear-gradient(135deg, #fde8ec, #fcd0d8);
+}
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(3) .spt-card-img {
+  background: linear-gradient(135deg, #e8f8f0, #c8eedd);
+}
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(4) .spt-card-img {
+  background: linear-gradient(135deg, #f0e8f8, #e0d0f0);
+}
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(5) .spt-card-img {
+  background: linear-gradient(135deg, #fef8e8, #fdecc8);
+}
+.sanguine-product-teaser .spt-grid .spt-card:nth-child(6) .spt-card-img {
+  background: linear-gradient(135deg, #06038d, #1a14c4);
+}
+
+.sanguine-product-teaser .spt-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  display: block;
+}
+
+/* ============================================================
+   Badges
+   ============================================================ */
+
+.sanguine-product-teaser .spt-badges {
+  position: absolute;
+  top: var(--spacing-xsmall);
+  left: var(--spacing-xsmall);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sanguine-product-teaser .spt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 100px;
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}
+
+.sanguine-product-teaser .spt-badge--instock {
+  background: rgb(234 110 64 / 15%);
+  color: var(--spt-orange);
+}
+
+.sanguine-product-teaser .spt-badge--instock::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spt-orange);
+  flex-shrink: 0;
+}
+
+.sanguine-product-teaser .spt-badge--low {
+  background: rgb(218 41 28 / 12%);
+  color: var(--spt-red);
+}
+
+.sanguine-product-teaser .spt-badge--low::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spt-red);
+  flex-shrink: 0;
+}
+
+.sanguine-product-teaser .spt-badge--seller {
+  background: var(--spt-navy);
+  color: var(--color-neutral-50);
+}
+
+.sanguine-product-teaser .spt-badge--gmp {
+  background: #3d0099;
+  color: var(--color-neutral-50);
+}
+
+/* ============================================================
+   Card body
+   ============================================================ */
+
+.sanguine-product-teaser .spt-card-body {
+  padding: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sanguine-product-teaser .spt-category {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-neutral-600);
+  margin: 0 0 var(--spacing-xxsmall);
+}
+
+.sanguine-product-teaser .spt-name {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-neutral-900);
+  margin: 0 0 var(--spacing-xxsmall);
+}
+
+.sanguine-product-teaser .spt-sku {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6875rem;
+  color: var(--color-neutral-600);
+  margin: 0 0 var(--spacing-xsmall);
+}
+
+/* ============================================================
+   Spec tags
+   ============================================================ */
+
+.sanguine-product-teaser .spt-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--spacing-small);
+  flex: 1;
+  align-content: flex-start;
+}
+
+.sanguine-product-teaser .spt-spec {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 3px var(--spacing-xsmall);
+  background: var(--color-neutral-200);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--shape-border-radius-1);
+  color: var(--color-neutral-700);
+}
+
+/* ============================================================
+   Card footer — price + CTA
+   ============================================================ */
+
+.sanguine-product-teaser .spt-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-small);
+  border-top: 1px solid var(--color-neutral-300);
+  margin-top: auto;
+  gap: var(--spacing-xsmall);
+}
+
+.sanguine-product-teaser .spt-price {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--spt-navy);
+  line-height: 1;
+}
+
+.sanguine-product-teaser .spt-price-unit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-neutral-600);
+}
+
+.sanguine-product-teaser .spt-cta {
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: var(--spacing-xsmall) var(--spacing-small);
+  background: var(--spt-red);
+  color: var(--color-neutral-50);
+  border: none;
+  border-radius: var(--shape-border-radius-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.sanguine-product-teaser .spt-cta:hover {
+  background: #f03425;
+}
