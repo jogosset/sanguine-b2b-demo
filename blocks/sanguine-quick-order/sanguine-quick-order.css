@@ -12,6 +12,29 @@
 }
 
 /* ============================================================
+   Section header
+   ============================================================ */
+
+.sanguine-quick-order .sqo-header {
+  margin-bottom: var(--spacing-medium);
+}
+
+.sanguine-quick-order .sqo-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--sqo-navy);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--spacing-xxsmall);
+  line-height: 1.2;
+}
+
+.sanguine-quick-order .sqo-subtitle {
+  font-size: 1.75rem;
+  color: var(--color-neutral-600);
+  margin: 0;
+}
+
+/* ============================================================
    Row
    ============================================================ */
 

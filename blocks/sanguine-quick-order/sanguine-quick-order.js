@@ -1,15 +1,53 @@
 /**
  * Sanguine Quick Order block
- * Table-style list of frequently reordered products.
+ * Optional section header + table-style list of frequently reordered products.
  *
- * Authoring: one row per product, four cells:
+ * Authoring — optional header rows (key | value), then one product row per item:
+ *   title        | Quick Order
+ *   subtitle     | Frequently reordered biospecimens
  *   icon · "Name | SKU" · availability · "price / unit"
  *
  * @param {Element} block
  */
+
+const HEADER_KEYS = new Set(['title', 'subtitle']);
+
 export default function decorate(block) {
-  const rows = [...block.querySelectorAll(':scope > div')];
+  const kv = {};
+  const productRows = [];
+
+  [...block.querySelectorAll(':scope > div')].forEach((row) => {
+    const cells = [...row.querySelectorAll(':scope > div')];
+    const key = cells[0]?.textContent?.trim().toLowerCase();
+    if (cells.length === 2 && HEADER_KEYS.has(key)) {
+      kv[key] = cells[1];
+    } else {
+      productRows.push(row);
+    }
+  });
+
   block.innerHTML = '';
+
+  // --- Section header ---
+  if (kv.title || kv.subtitle) {
+    const header = document.createElement('div');
+    header.className = 'sqo-header';
+    if (kv.title) {
+      const h2 = document.createElement('h2');
+      h2.className = 'sqo-title';
+      h2.textContent = kv.title.textContent.trim();
+      header.append(h2);
+    }
+    if (kv.subtitle) {
+      const p = document.createElement('p');
+      p.className = 'sqo-subtitle';
+      p.textContent = kv.subtitle.textContent.trim();
+      header.append(p);
+    }
+    block.append(header);
+  }
+
+  const rows = productRows;
 
   rows.forEach((row) => {
     const [iconCell, nameCell, availCell, priceCell] = [...row.querySelectorAll(':scope > div')];
