@@ -34,7 +34,7 @@
 }
 
 .sanguine-cta-banner .scb-desc {
-  font-size: 0.875rem;
+  font-size: 1.75rem;
   color: rgb(255 255 255 / 75%);
   margin: 0;
   line-height: 1.5;
@@ -55,7 +55,7 @@
   display: inline-flex;
   align-items: center;
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: 1.75rem;
   font-weight: 700;
   padding: var(--spacing-xsmall) var(--spacing-medium);
   border-radius: var(--shape-border-radius-2);
