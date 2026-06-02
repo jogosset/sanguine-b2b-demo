@@ -1155,7 +1155,7 @@
           "plugins": {
             "da": {
               "type": "key-value-block",
-              "unsafeHTML": "<div class=\"sanguine-featured-banner\"><div><div>eyebrow</div><div>New Product Line</div></div><div><div>heading</div><div>LeukoCert™ GMP-Grade Healthy Leukopaks</div></div><div><div>heading-accent</div><div>Healthy Leukopaks</div></div><div><div>description</div><div>Manufactured under cGMP conditions with full traceability documentation.</div></div><div><div>cta-primary</div><div><a href=\"/catalog/gmp\">Shop LeukoCert™</a></div></div><div><div>cta-secondary</div><div><a href=\"/docs/datasheet\">Download Datasheet</a></div></div><div><div>stat-1</div><div>🧪 | ≥2×10⁹ | Minimum cell count</div></div><div><div>stat-2</div><div>✅ | cGMP Certified | Full CoA &amp; donor records</div></div><div><div>stat-3</div><div>🚚 | 72h Lead Time | Rush available</div></div></div>"
+              "unsafeHTML": "<div class=\"sanguine-featured-banner\"><div><div>eyebrow</div><div>New Product Line</div></div><div><div>heading</div><div>LeukoCert™ GMP-Grade</div></div><div><div>heading-accent</div><div>Healthy Leukopaks</div></div><div><div>description</div><div>Manufactured under cGMP conditions with full traceability documentation.</div></div><div><div>cta-primary</div><div><a href=\"/catalog/gmp\">Shop LeukoCert™</a></div></div><div><div>cta-secondary</div><div><a href=\"/docs/datasheet\">Download Datasheet</a></div></div><div><div>stat-1</div><div>🧪 | ≥2×10⁹ | Minimum cell count</div></div><div><div>stat-2</div><div>✅ | cGMP Certified | Full CoA &amp; donor records</div></div><div><div>stat-3</div><div>🚚 | 72h Lead Time | Rush available</div></div></div>"
             }
           }
         },

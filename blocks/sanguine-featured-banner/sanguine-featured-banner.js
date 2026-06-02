@@ -24,13 +24,13 @@ export default function decorate(block) {
   const text = (key) => kv[key]?.textContent?.trim() || '';
   const link = (key) => kv[key]?.querySelector('a');
 
-  // --- Heading with accent ---
+  // --- Heading: main line (white) + accent line (orange) below ---
   const headingText = text('heading');
-  const accentWord = text('heading-accent');
+  const accentText = text('heading-accent');
   const h2 = document.createElement('h2');
   h2.className = 'sfb-heading';
-  if (accentWord && headingText.includes(accentWord)) {
-    h2.innerHTML = headingText.replace(accentWord, `<span>${accentWord}</span>`);
+  if (accentText) {
+    h2.innerHTML = `${headingText}<br><span class="sfb-accent">${accentText}</span>`;
   } else {
     h2.textContent = headingText;
   }
