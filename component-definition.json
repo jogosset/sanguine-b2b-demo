@@ -1117,7 +1117,13 @@
           "plugins": {
             "da": {
               "type": "key-value-block",
-              "unsafeHTML": "<div class=\"sanguine-hero\"><div><div>heading</div><div>Biospecimens for Breakthrough Research</div></div><div><div>heading-accent</div><div>Breakthrough</div></div><div><div>description</div><div>Premium-quality PBMCs, Leukopaks, plasma, serum and whole blood from verified donors across 100+ disease states.</div></div><div><div>cta-primary</div><div><a href=\"/catalog\">Browse Catalog</a></div></div><div><div>cta-secondary</div><div><a href=\"/contact\">Talk to a Scientist</a></div></div><div><div>stat-1</div><div>70K+ | Verified Donors</div></div><div><div>stat-2</div><div>100+ | Disease States</div></div><div><div>stat-3</div><div>35/40 | Top Pharma Partners</div></div><div><div>stat-4</div><div>48h | Avg. Fulfillment</div></div><div><div>card-1-label</div><div>Live Inventory</div></div><div><div>card-1-value</div><div>1,240</div></div><div><div>card-1-sub</div><div>PBMC units in stock</div></div><div><div>card-1-mono</div><div>SNG-PBMC-CROHN-A</div></div></div>"
+              "unsafeHTML": "<div class=\"sanguine-hero\"><div><div>background-image</div><div><picture><img src=\"\" alt=\"Hero background\"></picture></div></div><div><div>heading</div><div>Biospecimens for Breakthrough Research</div></div><div><div>heading-accent</div><div>Breakthrough</div></div><div><div>description</div><div>Premium-quality PBMCs, Leukopaks, plasma, serum and whole blood from verified donors across 100+ disease states.</div></div><div><div>cta-primary</div><div><a href=\"/catalog\">Browse Catalog</a></div></div><div><div>cta-secondary</div><div><a href=\"/contact\">Talk to a Scientist</a></div></div><div><div>stat-1</div><div>70K+ | Verified Donors</div></div><div><div>stat-2</div><div>100+ | Disease States</div></div><div><div>stat-3</div><div>35/40 | Top Pharma Partners</div></div><div><div>stat-4</div><div>48h | Avg. Fulfillment</div></div><div><div>card-1-label</div><div>Live Inventory</div></div><div><div>card-1-value</div><div>1,240</div></div><div><div>card-1-sub</div><div>PBMC units in stock</div></div><div><div>card-1-mono</div><div>SNG-PBMC-CROHN-A</div></div></div>",
+              "fields": [
+                {
+                  "name": "background-image",
+                  "selector": "div:nth-child(1)>div:nth-child(2)>picture>img[src]"
+                }
+              ]
             }
           }
         },

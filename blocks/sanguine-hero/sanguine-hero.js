@@ -102,8 +102,20 @@ export default function decorate(block) {
     });
   }
 
+  // --- Background image ---
+  const bgCell = kv['background-image'];
+  const bgMedia = bgCell?.querySelector('picture') || bgCell?.querySelector('img');
+
   // --- Assemble block ---
   block.innerHTML = '';
+
+  if (bgMedia) {
+    const bg = document.createElement('div');
+    bg.className = 'sh-bg';
+    bg.append(bgMedia);
+    block.append(bg);
+  }
+
   block.append(content);
 
   if (cards.length) {

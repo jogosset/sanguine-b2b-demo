@@ -17,10 +17,12 @@
   overflow: hidden;
 }
 
+/* Radial glow accents — above bg image, below content */
 .sanguine-hero::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image:
     radial-gradient(circle at 70% 50%, rgb(234 110 64 / 8%) 0%, transparent 55%),
     radial-gradient(circle at 20% 80%, rgb(218 41 28 / 6%) 0%, transparent 40%);
@@ -28,13 +30,47 @@
 }
 
 /* ============================================================
+   Background image layer
+   ============================================================ */
+
+.sanguine-hero .sh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Dark overlay keeps text legible over any background image */
+.sanguine-hero .sh-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(6 3 141 / 75%);
+}
+
+.sanguine-hero .sh-bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sanguine-hero .sh-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ============================================================
    Layout — mobile first (stacked), then side-by-side
    ============================================================ */
 
+/* Content sits above bg layer and glow accents */
 .sanguine-hero > .sh-content,
 .sanguine-hero > .sh-visual {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 @media (min-width: 900px) {
