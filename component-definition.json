@@ -1145,7 +1145,7 @@
             "da": {
               "rows": 6,
               "columns": 4,
-              "unsafeHTML": "<div class=\"sanguine-categories\"><div><div>🫀</div><div>PBMCs</div><div>342 products</div><div><a href=\"/catalog/pbmcs\">/catalog/pbmcs</a></div></div><div><div>🩸</div><div>Whole Blood</div><div>218 products</div><div><a href=\"/catalog/whole-blood\">/catalog/whole-blood</a></div></div></div>"
+              "unsafeHTML": "<div class=\"sanguine-categories\"><div><div>title</div><div>Browse by Specimen Type</div></div><div><div>subtitle</div><div>Standardized, QC-verified biospecimens ready for your research workflow</div></div><div><div>view-all</div><div><a href=\"/catalog\">View all categories →</a></div></div><div><div>🫀</div><div>PBMCs</div><div>342 products</div><div><a href=\"/catalog/pbmcs\">/catalog/pbmcs</a></div></div><div><div>🩸</div><div>Whole Blood</div><div>218 products</div><div><a href=\"/catalog/whole-blood\">/catalog/whole-blood</a></div></div></div>"
             }
           }
         },

@@ -3,31 +3,86 @@
    ============================================================ */
 
 .sanguine-categories {
+  --sc-navy: #06038d;
   --sc-orange: #ea6e40;
+}
 
+/* ============================================================
+   Section header
+   ============================================================ */
+
+.sanguine-categories .sc-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-big);
+}
+
+.sanguine-categories .sc-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--sc-navy);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--spacing-xxsmall);
+  line-height: 1.25;
+}
+
+.sanguine-categories .sc-subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-neutral-600);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.sanguine-categories .sc-view-all {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--sc-navy);
+  border: 1.5px solid var(--sc-navy);
+  border-radius: var(--shape-border-radius-2);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.sanguine-categories .sc-view-all:hover {
+  background: rgb(6 3 141 / 6%);
+}
+
+/* ============================================================
+   Cards grid
+   ============================================================ */
+
+.sanguine-categories .sc-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-small);
-  padding-inline: var(--spacing-small);
+  gap: var(--spacing-xsmall);
 }
 
 @media (min-width: 600px) {
-  .sanguine-categories {
+  .sanguine-categories .sc-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 900px) {
-  .sanguine-categories {
+  .sanguine-categories .sc-grid {
     grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
+    gap: var(--spacing-small);
   }
 }
 
+/* ============================================================
+   Card
+   ============================================================ */
+
 .sanguine-categories .sc-card {
-  background: var(--color-neutral-200);
-  border: 1.5px solid var(--color-neutral-300);
-  border-radius: 12px;
+  background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--shape-border-radius-2);
   padding: var(--spacing-medium) var(--spacing-small);
   text-align: center;
   cursor: pointer;
@@ -36,37 +91,73 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
 }
 
 .sanguine-categories .sc-card:hover {
-  border-color: var(--sc-orange);
+  border-color: var(--sc-navy);
+  box-shadow: 0 4px 16px rgb(6 3 141 / 10%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgb(234 110 64 / 15%);
 }
+
+/* ============================================================
+   Icon — per-position tint colours matching Sanguine specimen types
+   ============================================================ */
 
 .sanguine-categories .sc-icon {
   width: 44px;
   height: 44px;
   border-radius: var(--shape-border-radius-2);
-  background: rgb(234 110 64 / 10%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
   margin-bottom: var(--spacing-xsmall);
+  /* default tint — overridden per position below */
+  background: rgb(234 110 64 / 10%);
 }
 
+/* PBMCs — warm orange */
+.sanguine-categories .sc-grid .sc-card:nth-child(1) .sc-icon {
+  background: rgb(234 110 64 / 12%);
+}
+/* Whole Blood — red */
+.sanguine-categories .sc-grid .sc-card:nth-child(2) .sc-icon {
+  background: rgb(218 41 28 / 12%);
+}
+/* Leukopaks — green */
+.sanguine-categories .sc-grid .sc-card:nth-child(3) .sc-icon {
+  background: rgb(100 160 80 / 12%);
+}
+/* Plasma — purple */
+.sanguine-categories .sc-grid .sc-card:nth-child(4) .sc-icon {
+  background: rgb(140 100 220 / 12%);
+}
+/* Serum — amber */
+.sanguine-categories .sc-grid .sc-card:nth-child(5) .sc-icon {
+  background: rgb(240 160 40 / 12%);
+}
+/* GMP Grade — deep navy */
+.sanguine-categories .sc-grid .sc-card:nth-child(6) .sc-icon {
+  background: rgb(6 3 141 / 8%);
+}
+
+/* ============================================================
+   Card text
+   ============================================================ */
+
 .sanguine-categories .sc-name {
-  font-size: 1.625rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-neutral-800);
   display: block;
   margin-bottom: 2px;
+  line-height: 1.3;
 }
 
 .sanguine-categories .sc-count {
-  font-size: 1.375rem;
+  font-size: 0.6875rem;
   color: var(--color-neutral-600);
   display: block;
+  line-height: 1.3;
 }
