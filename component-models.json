@@ -1,5 +1,94 @@
 [
   {
+    "id": "sanguine-hero",
+    "fields": [
+      { "component": "reference", "valueType": "string", "name": "background-image", "label": "Background Image", "multi": false },
+      { "component": "text", "valueType": "string", "name": "eyebrow", "label": "Eyebrow Badge" },
+      { "component": "text", "valueType": "string", "name": "heading", "label": "Heading (Line 1 — white)" },
+      { "component": "text", "valueType": "string", "name": "heading-accent", "label": "Heading Accent (Line 2 — orange)" },
+      { "component": "richtext", "valueType": "string", "name": "description", "label": "Description" },
+      { "component": "text", "valueType": "string", "name": "cta-primary", "label": "Primary CTA (text | /url)" },
+      { "component": "text", "valueType": "string", "name": "cta-secondary", "label": "Secondary CTA (text | /url)" },
+      { "component": "text", "valueType": "string", "name": "stat-1", "label": "Stat 1 (Value | Label)" },
+      { "component": "text", "valueType": "string", "name": "stat-2", "label": "Stat 2 (Value | Label)" },
+      { "component": "text", "valueType": "string", "name": "stat-3", "label": "Stat 3 (Value | Label)" },
+      { "component": "text", "valueType": "string", "name": "stat-4", "label": "Stat 4 (Value | Label)" },
+      { "component": "text", "valueType": "string", "name": "card-1-label", "label": "Card 1 — Label" },
+      { "component": "text", "valueType": "string", "name": "card-1-value", "label": "Card 1 — Value" },
+      { "component": "text", "valueType": "string", "name": "card-1-sub", "label": "Card 1 — Sub-text" },
+      { "component": "text", "valueType": "string", "name": "card-1-mono", "label": "Card 1 — Mono text" },
+      { "component": "text", "valueType": "string", "name": "card-2-label", "label": "Card 2 — Label" },
+      { "component": "text", "valueType": "string", "name": "card-2-value", "label": "Card 2 — Value" },
+      { "component": "text", "valueType": "string", "name": "card-2-sub", "label": "Card 2 — Sub-text" },
+      { "component": "text", "valueType": "string", "name": "card-2-mono", "label": "Card 2 — Mono text" },
+      { "component": "text", "valueType": "string", "name": "card-3-label", "label": "Card 3 — Label" },
+      { "component": "text", "valueType": "string", "name": "card-3-value", "label": "Card 3 — Value" },
+      { "component": "text", "valueType": "string", "name": "card-3-sub", "label": "Card 3 — Sub-text" },
+      { "component": "text", "valueType": "string", "name": "card-3-mono", "label": "Card 3 — Mono text" },
+      { "component": "text", "valueType": "string", "name": "card-4-label", "label": "Card 4 — Label" },
+      { "component": "text", "valueType": "string", "name": "card-4-value", "label": "Card 4 — Value" },
+      { "component": "text", "valueType": "string", "name": "card-4-sub", "label": "Card 4 — Sub-text" },
+      { "component": "text", "valueType": "string", "name": "card-4-mono", "label": "Card 4 — Mono text" }
+    ]
+  },
+  {
+    "id": "sanguine-trust-bar",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "item-1", "label": "Item 1 (emoji | label | sub-label)", "description": "Pipe-separated: 🔬 | IRB Compliant | All specimens" },
+      { "component": "text", "valueType": "string", "name": "item-2", "label": "Item 2" },
+      { "component": "text", "valueType": "string", "name": "item-3", "label": "Item 3" },
+      { "component": "text", "valueType": "string", "name": "item-4", "label": "Item 4" },
+      { "component": "text", "valueType": "string", "name": "item-5", "label": "Item 5" }
+    ]
+  },
+  {
+    "id": "sanguine-categories",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "title", "label": "Section Title" },
+      { "component": "text", "valueType": "string", "name": "subtitle", "label": "Section Subtitle" },
+      { "component": "text", "valueType": "string", "name": "view-all", "label": "View All Link (text | /url)" }
+    ]
+  },
+  {
+    "id": "sanguine-featured-banner",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "eyebrow", "label": "Eyebrow Badge" },
+      { "component": "text", "valueType": "string", "name": "heading", "label": "Heading (Line 1 — white)" },
+      { "component": "text", "valueType": "string", "name": "heading-accent", "label": "Heading Accent (Line 2 — orange)" },
+      { "component": "richtext", "valueType": "string", "name": "description", "label": "Description" },
+      { "component": "text", "valueType": "string", "name": "cta-primary", "label": "Primary CTA" },
+      { "component": "text", "valueType": "string", "name": "cta-secondary", "label": "Secondary CTA" },
+      { "component": "text", "valueType": "string", "name": "stat-1", "label": "Stat 1 (icon | value | label)" },
+      { "component": "text", "valueType": "string", "name": "stat-2", "label": "Stat 2 (icon | value | label)" },
+      { "component": "text", "valueType": "string", "name": "stat-3", "label": "Stat 3 (icon | value | label)" }
+    ]
+  },
+  {
+    "id": "sanguine-cta-banner",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "heading", "label": "Heading" },
+      { "component": "richtext", "valueType": "string", "name": "description", "label": "Description" },
+      { "component": "text", "valueType": "string", "name": "cta-primary", "label": "Primary CTA" },
+      { "component": "text", "valueType": "string", "name": "cta-secondary", "label": "Secondary CTA" }
+    ]
+  },
+  {
+    "id": "sanguine-quick-order",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "title", "label": "Section Title" },
+      { "component": "text", "valueType": "string", "name": "subtitle", "label": "Section Subtitle" }
+    ]
+  },
+  {
+    "id": "sanguine-product-teaser",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "title", "label": "Section Title" },
+      { "component": "text", "valueType": "string", "name": "subtitle", "label": "Section Subtitle" },
+      { "component": "text", "valueType": "string", "name": "view-all", "label": "View All Link" },
+      { "component": "text", "valueType": "string", "name": "filters", "label": "Filter Labels (pipe-separated)", "description": "e.g. All | Healthy Donors | Disease State | Autoimmune" }
+    ]
+  },
+  {
     "id": "page-metadata",
     "fields": [
       {
