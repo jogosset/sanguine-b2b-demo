@@ -100,21 +100,17 @@
    Product grid
    ============================================================ */
 
+/* Always 3 columns — 2 rows of 3 cards */
 .sanguine-product-teaser .spt-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-medium);
 }
 
-@media (min-width: 600px) {
+/* Narrow screens only */
+@media (max-width: 599px) {
   .sanguine-product-teaser .spt-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .sanguine-product-teaser .spt-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
