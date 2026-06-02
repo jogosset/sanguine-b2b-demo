@@ -9,7 +9,7 @@
   --sh-orange: #ea6e40;
   --sh-red: #da291c;
 
-  background: linear-gradient(135deg, var(--sh-navy) 0%, var(--sh-navy-mid) 60%, #0d2545 100%);
+  background: #050810;
   color: var(--color-neutral-50);
   padding-block: var(--spacing-xlarge);
   padding-inline: var(--spacing-small);
@@ -45,7 +45,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(6 3 141 / 75%);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 10, 0.68) 0%,
+    rgba(0, 0, 10, 0.52) 60%,
+    rgba(0, 0, 10, 0.38) 100%
+  );
 }
 
 .sanguine-hero .sh-bg picture {
