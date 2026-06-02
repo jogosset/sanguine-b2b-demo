@@ -1112,6 +1112,69 @@
           }
         },
         {
+          "title": "Sanguine Hero",
+          "id": "sanguine-hero",
+          "plugins": {
+            "da": {
+              "type": "key-value-block",
+              "unsafeHTML": "<div class=\"sanguine-hero\"><div><div>heading</div><div>Biospecimens for Breakthrough Research</div></div><div><div>heading-accent</div><div>Breakthrough</div></div><div><div>description</div><div>Premium-quality PBMCs, Leukopaks, plasma, serum and whole blood from verified donors across 100+ disease states.</div></div><div><div>cta-primary</div><div><a href=\"/catalog\">Browse Catalog</a></div></div><div><div>cta-secondary</div><div><a href=\"/contact\">Talk to a Scientist</a></div></div><div><div>stat-1</div><div>70K+ | Verified Donors</div></div><div><div>stat-2</div><div>100+ | Disease States</div></div><div><div>stat-3</div><div>35/40 | Top Pharma Partners</div></div><div><div>stat-4</div><div>48h | Avg. Fulfillment</div></div><div><div>card-1-label</div><div>Live Inventory</div></div><div><div>card-1-value</div><div>1,240</div></div><div><div>card-1-sub</div><div>PBMC units in stock</div></div><div><div>card-1-mono</div><div>SNG-PBMC-CROHN-A</div></div></div>"
+            }
+          }
+        },
+        {
+          "title": "Sanguine Trust Bar",
+          "id": "sanguine-trust-bar",
+          "plugins": {
+            "da": {
+              "rows": 5,
+              "columns": 3,
+              "unsafeHTML": "<div class=\"sanguine-trust-bar\"><div><div>🔬</div><div>IRB Compliant</div><div>All specimens</div></div><div><div>🧊</div><div>Cold-Chain Guaranteed</div><div>Overnight delivery</div></div><div><div>📋</div><div>Full CoA Included</div><div>Every order</div></div><div><div>🔄</div><div>Custom Cohorts</div><div>Matched donor sets</div></div><div><div>⚡</div><div>48h Fulfillment</div><div>In-stock items</div></div></div>"
+            }
+          }
+        },
+        {
+          "title": "Sanguine Categories",
+          "id": "sanguine-categories",
+          "plugins": {
+            "da": {
+              "rows": 6,
+              "columns": 4,
+              "unsafeHTML": "<div class=\"sanguine-categories\"><div><div>🫀</div><div>PBMCs</div><div>342 products</div><div><a href=\"/catalog/pbmcs\">/catalog/pbmcs</a></div></div><div><div>🩸</div><div>Whole Blood</div><div>218 products</div><div><a href=\"/catalog/whole-blood\">/catalog/whole-blood</a></div></div></div>"
+            }
+          }
+        },
+        {
+          "title": "Sanguine Featured Banner",
+          "id": "sanguine-featured-banner",
+          "plugins": {
+            "da": {
+              "type": "key-value-block",
+              "unsafeHTML": "<div class=\"sanguine-featured-banner\"><div><div>eyebrow</div><div>New Product Line</div></div><div><div>heading</div><div>LeukoCert™ GMP-Grade Healthy Leukopaks</div></div><div><div>heading-accent</div><div>Healthy Leukopaks</div></div><div><div>description</div><div>Manufactured under cGMP conditions with full traceability documentation.</div></div><div><div>cta-primary</div><div><a href=\"/catalog/gmp\">Shop LeukoCert™</a></div></div><div><div>cta-secondary</div><div><a href=\"/docs/datasheet\">Download Datasheet</a></div></div><div><div>stat-1</div><div>🧪 | ≥2×10⁹ | Minimum cell count</div></div><div><div>stat-2</div><div>✅ | cGMP Certified | Full CoA &amp; donor records</div></div><div><div>stat-3</div><div>🚚 | 72h Lead Time | Rush available</div></div></div>"
+            }
+          }
+        },
+        {
+          "title": "Sanguine CTA Banner",
+          "id": "sanguine-cta-banner",
+          "plugins": {
+            "da": {
+              "type": "key-value-block",
+              "unsafeHTML": "<div class=\"sanguine-cta-banner\"><div><div>heading</div><div>Need a custom cohort or bulk order?</div></div><div><div>description</div><div>Our scientific team will source matched donors across any disease state, HLA type, or demographic requirement.</div></div><div><div>cta-primary</div><div><a href=\"/quote\">Request Custom Quote</a></div></div><div><div>cta-secondary</div><div><a href=\"/contact\">Talk to a Scientist</a></div></div></div>"
+            }
+          }
+        },
+        {
+          "title": "Sanguine Quick Order",
+          "id": "sanguine-quick-order",
+          "plugins": {
+            "da": {
+              "rows": 3,
+              "columns": 4,
+              "unsafeHTML": "<div class=\"sanguine-quick-order\"><div><div>🧬</div><div>MS PBMCs — Relapsing-Remitting | SNG-PBMC-RRMS-B</div><div>82 units</div><div>$410 / vial</div></div><div><div>💉</div><div>Lupus Leukopak — Anti-dsDNA+ Confirmed | SNG-LPK-SLE-001</div><div>12 units</div><div>$1,650 / unit</div></div></div>"
+            }
+          }
+        },
+        {
           "title": "Site Nav (JG)",
           "id": "site-nav-jg",
           "model": "site-nav-jg",

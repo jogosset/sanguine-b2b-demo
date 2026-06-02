@@ -155,3 +155,101 @@
         justify-content: flex-start;
     }
 }
+
+/* ============================================================
+   Catalog variant — Sanguine biospecimen product cards
+   ============================================================ */
+
+.product-teaser-v2.catalog {
+  --ptv2-catalog-navy: #06038d;
+  --ptv2-catalog-orange: #ea6e40;
+  --ptv2-catalog-red: #da291c;
+
+  background: var(--color-neutral-50);
+  border: 1.5px solid var(--color-neutral-300);
+  border-radius: 14px;
+  padding: 0;
+  gap: 0;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.product-teaser-v2.catalog:hover {
+  box-shadow: 0 12px 32px rgb(11 22 41 / 10%);
+  transform: translateY(-3px);
+  border-color: #cdd7e5;
+}
+
+/* SKU in monospace below title */
+.product-teaser-v2.catalog .ptv2-sku {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6875rem;
+  color: var(--color-neutral-600);
+  margin-bottom: var(--spacing-xsmall);
+}
+
+/* Spec tags row */
+.product-teaser-v2.catalog .ptv2-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xxsmall);
+  margin-bottom: var(--spacing-small);
+}
+
+.product-teaser-v2.catalog .ptv2-spec-tag {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 3px var(--spacing-xsmall);
+  background: var(--color-neutral-200);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--shape-border-radius-1);
+  color: var(--color-neutral-700);
+}
+
+/* Badge variants */
+.product-teaser-v2.catalog .ptv2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px var(--spacing-xsmall);
+  border-radius: 100px;
+}
+
+.product-teaser-v2.catalog .ptv2-badge-instock {
+  background: rgb(234 110 64 / 15%);
+  color: var(--ptv2-catalog-orange);
+}
+
+.product-teaser-v2.catalog .ptv2-badge-low {
+  background: rgb(218 41 28 / 10%);
+  color: var(--ptv2-catalog-red);
+}
+
+.product-teaser-v2.catalog .ptv2-badge-navy {
+  background: var(--ptv2-catalog-navy);
+  color: var(--color-neutral-50);
+}
+
+/* Price */
+.product-teaser-v2.catalog .ptv2-price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ptv2-catalog-navy);
+}
+
+/* CTA button override */
+.product-teaser-v2.catalog .actions .button {
+  background: var(--ptv2-catalog-red);
+  border-color: var(--ptv2-catalog-red);
+  color: var(--color-neutral-50);
+}
+
+.product-teaser-v2.catalog .actions .button:hover {
+  background: #f03425;
+  border-color: #f03425;
+}

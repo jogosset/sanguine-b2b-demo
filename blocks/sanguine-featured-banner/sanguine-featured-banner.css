@@ -1,0 +1,173 @@
+/* ============================================================
+   Sanguine Featured Banner
+   ============================================================ */
+
+.sanguine-featured-banner {
+  --sfb-navy: #06038d;
+  --sfb-navy-soft: #1a14c4;
+  --sfb-orange: #ea6e40;
+  --sfb-red: #da291c;
+
+  background: linear-gradient(135deg, var(--sfb-navy) 0%, var(--sfb-navy-soft) 100%);
+  border-radius: 20px;
+  padding: var(--spacing-xxbig);
+  position: relative;
+  overflow: hidden;
+  color: var(--color-neutral-50);
+}
+
+.sanguine-featured-banner::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 40%;
+  background: radial-gradient(circle at 80% 50%, rgb(234 110 64 / 12%) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+@media (min-width: 900px) {
+  .sanguine-featured-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xxbig);
+    padding: var(--spacing-xxbig) 56px;
+  }
+}
+
+.sanguine-featured-banner .sfb-content {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+}
+
+/* ============================================================
+   Content
+   ============================================================ */
+
+.sanguine-featured-banner .sfb-eyebrow {
+  display: inline-flex;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgb(234 110 64 / 15%);
+  color: var(--sfb-orange);
+  padding: var(--spacing-xxsmall) var(--spacing-xsmall);
+  border-radius: 100px;
+  margin-bottom: var(--spacing-small);
+}
+
+.sanguine-featured-banner .sfb-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--color-neutral-50);
+  margin-block: 0 var(--spacing-small);
+}
+
+.sanguine-featured-banner .sfb-heading span {
+  color: var(--sfb-orange);
+}
+
+.sanguine-featured-banner .sfb-desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 60%);
+  margin-block: 0 var(--spacing-big);
+}
+
+.sanguine-featured-banner .sfb-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.sanguine-featured-banner .sfb-btn {
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: var(--spacing-xsmall) var(--spacing-medium);
+  border-radius: var(--shape-border-radius-2);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.sanguine-featured-banner .sfb-btn-primary {
+  background: var(--sfb-red);
+  color: var(--color-neutral-50);
+  border-color: var(--sfb-red);
+}
+
+.sanguine-featured-banner .sfb-btn-primary:hover {
+  background: #f03425;
+  border-color: #f03425;
+}
+
+.sanguine-featured-banner .sfb-btn-ghost {
+  background: rgb(255 255 255 / 8%);
+  color: var(--color-neutral-50);
+  border-color: rgb(255 255 255 / 20%);
+}
+
+.sanguine-featured-banner .sfb-btn-ghost:hover {
+  background: rgb(255 255 255 / 16%);
+}
+
+/* ============================================================
+   Stat cards (right column)
+   ============================================================ */
+
+.sanguine-featured-banner .sfb-visual {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+  margin-top: var(--spacing-big);
+}
+
+@media (min-width: 900px) {
+  .sanguine-featured-banner .sfb-visual {
+    margin-top: 0;
+  }
+}
+
+.sanguine-featured-banner .sfb-stat-card {
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: var(--shape-border-radius-2);
+  padding: var(--spacing-small) var(--spacing-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  min-width: 240px;
+}
+
+.sanguine-featured-banner .sfb-stat-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.sanguine-featured-banner .sfb-stat-val {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-neutral-50);
+}
+
+.sanguine-featured-banner .sfb-stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 50%);
+}

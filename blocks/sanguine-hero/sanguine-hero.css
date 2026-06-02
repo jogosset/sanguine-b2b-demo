@@ -1,0 +1,225 @@
+/* ============================================================
+   Sanguine Hero
+   Brand colors scoped here — never in styles.css
+   ============================================================ */
+
+.sanguine-hero {
+  --sh-navy: #06038d;
+  --sh-navy-mid: #08059e;
+  --sh-orange: #ea6e40;
+  --sh-red: #da291c;
+
+  background: linear-gradient(135deg, var(--sh-navy) 0%, var(--sh-navy-mid) 60%, #0d2545 100%);
+  color: var(--color-neutral-50);
+  padding-block: var(--spacing-xlarge);
+  padding-inline: var(--spacing-small);
+  position: relative;
+  overflow: hidden;
+}
+
+.sanguine-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 70% 50%, rgb(234 110 64 / 8%) 0%, transparent 55%),
+    radial-gradient(circle at 20% 80%, rgb(218 41 28 / 6%) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* ============================================================
+   Layout — mobile first (stacked), then side-by-side
+   ============================================================ */
+
+.sanguine-hero > .sh-content,
+.sanguine-hero > .sh-visual {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 900px) {
+  .sanguine-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-large);
+    align-items: center;
+  }
+}
+
+/* ============================================================
+   Content column
+   ============================================================ */
+
+.sanguine-hero .sh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgb(234 110 64 / 15%);
+  color: var(--sh-orange);
+  padding: var(--spacing-xxsmall) var(--spacing-xsmall);
+  border-radius: 100px;
+  margin-bottom: var(--spacing-medium);
+}
+
+.sanguine-hero .sh-heading {
+  font: var(--type-display-3-font);
+  letter-spacing: -0.02em;
+  color: var(--color-neutral-50);
+  margin-block: 0 var(--spacing-medium);
+  line-height: 1.1;
+}
+
+.sanguine-hero .sh-heading span {
+  color: var(--sh-orange);
+}
+
+@media (min-width: 900px) {
+  .sanguine-hero .sh-heading {
+    font: var(--type-display-2-font);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+}
+
+.sanguine-hero .sh-desc {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgb(255 255 255 / 65%);
+  margin-block: 0 var(--spacing-big);
+  max-width: 480px;
+}
+
+/* ============================================================
+   CTAs
+   ============================================================ */
+
+.sanguine-hero .sh-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.sanguine-hero .sh-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: var(--spacing-small) var(--spacing-big);
+  border-radius: var(--shape-border-radius-2);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.sanguine-hero .sh-btn-primary {
+  background: var(--sh-red);
+  color: var(--color-neutral-50);
+  border-color: var(--sh-red);
+}
+
+.sanguine-hero .sh-btn-primary:hover {
+  background: #f03425;
+  border-color: #f03425;
+}
+
+.sanguine-hero .sh-btn-ghost {
+  background: rgb(255 255 255 / 8%);
+  color: var(--color-neutral-50);
+  border-color: rgb(255 255 255 / 20%);
+}
+
+.sanguine-hero .sh-btn-ghost:hover {
+  background: rgb(255 255 255 / 16%);
+}
+
+/* ============================================================
+   Stats strip
+   ============================================================ */
+
+.sanguine-hero .sh-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-big);
+  margin-top: var(--spacing-xxbig);
+  padding-top: var(--spacing-big);
+  border-top: 1px solid rgb(255 255 255 / 10%);
+}
+
+.sanguine-hero .sh-stat-val {
+  display: block;
+  font: var(--type-headline-1-font);
+  color: var(--color-neutral-50);
+  line-height: 1;
+}
+
+.sanguine-hero .sh-stat-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 50%);
+  margin-top: var(--spacing-xxsmall);
+}
+
+/* ============================================================
+   Visual column (data cards)
+   ============================================================ */
+
+.sanguine-hero .sh-visual {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .sanguine-hero .sh-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-small);
+  }
+}
+
+.sanguine-hero .sh-card {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 14px;
+  padding: var(--spacing-medium);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
+.sanguine-hero .sh-card-featured {
+  border-color: rgb(234 110 64 / 25%);
+  background: rgb(234 110 64 / 5%);
+}
+
+.sanguine-hero .sh-card-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 40%);
+}
+
+.sanguine-hero .sh-card-val {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-neutral-50);
+}
+
+.sanguine-hero .sh-card-sub {
+  font-size: 0.75rem;
+  color: rgb(255 255 255 / 45%);
+}
+
+.sanguine-hero .sh-card-mono {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: var(--sh-orange);
+  margin-top: var(--spacing-xxsmall);
+}

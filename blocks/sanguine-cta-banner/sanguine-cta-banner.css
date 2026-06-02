@@ -1,0 +1,86 @@
+/* ============================================================
+   Sanguine CTA Banner
+   ============================================================ */
+
+.sanguine-cta-banner {
+  --scb-red: #da291c;
+
+  background: var(--scb-red);
+  border-radius: var(--shape-border-radius-2);
+  padding: var(--spacing-xxbig) var(--spacing-big);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-big);
+  color: var(--color-neutral-50);
+}
+
+@media (min-width: 900px) {
+  .sanguine-cta-banner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-xxbig) var(--spacing-xxbig);
+  }
+}
+
+.sanguine-cta-banner .scb-copy {
+  flex: 1;
+}
+
+.sanguine-cta-banner .scb-heading {
+  font: var(--type-headline-2-strong-font);
+  color: var(--color-neutral-50);
+  margin: 0 0 var(--spacing-xsmall);
+}
+
+.sanguine-cta-banner .scb-desc {
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 75%);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sanguine-cta-banner .scb-desc p {
+  margin: 0;
+}
+
+.sanguine-cta-banner .scb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+  flex-shrink: 0;
+}
+
+.sanguine-cta-banner .scb-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: var(--spacing-xsmall) var(--spacing-medium);
+  border-radius: var(--shape-border-radius-2);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s, opacity 0.18s;
+}
+
+.sanguine-cta-banner .scb-btn-white {
+  background: var(--color-neutral-50);
+  color: var(--scb-red);
+  border-color: var(--color-neutral-50);
+}
+
+.sanguine-cta-banner .scb-btn-white:hover {
+  background: rgb(255 255 255 / 90%);
+}
+
+.sanguine-cta-banner .scb-btn-ghost {
+  background: rgb(255 255 255 / 8%);
+  color: var(--color-neutral-50);
+  border-color: rgb(255 255 255 / 20%);
+}
+
+.sanguine-cta-banner .scb-btn-ghost:hover {
+  background: rgb(255 255 255 / 16%);
+}

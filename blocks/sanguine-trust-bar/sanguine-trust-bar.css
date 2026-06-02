@@ -1,0 +1,72 @@
+/* ============================================================
+   Sanguine Trust Bar
+   ============================================================ */
+
+.sanguine-trust-bar {
+  --stb-orange: #ea6e40;
+
+  background: var(--color-neutral-200);
+  border-top: var(--shape-border-width-1) solid var(--color-neutral-300);
+  border-bottom: var(--shape-border-width-1) solid var(--color-neutral-300);
+  padding-block: var(--spacing-big);
+  padding-inline: var(--spacing-small);
+}
+
+.sanguine-trust-bar .stb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  padding-block: var(--spacing-xsmall);
+}
+
+@media (min-width: 600px) {
+  .sanguine-trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: var(--spacing-medium);
+    padding-block: var(--spacing-big);
+  }
+
+  .sanguine-trust-bar .stb-item {
+    padding-block: 0;
+  }
+}
+
+.sanguine-trust-bar .stb-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--shape-border-radius-2);
+  background: rgb(234 110 64 / 12%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sanguine-trust-bar .stb-icon p {
+  margin: 0;
+  line-height: 1;
+}
+
+.sanguine-trust-bar .stb-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-neutral-800);
+  display: block;
+}
+
+.sanguine-trust-bar .stb-label p {
+  margin: 0;
+}
+
+.sanguine-trust-bar .stb-sub {
+  font-size: 0.6875rem;
+  color: var(--color-neutral-600);
+  display: block;
+}
+
+.sanguine-trust-bar .stb-sub p {
+  margin: 0;
+}
