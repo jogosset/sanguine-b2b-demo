@@ -1,14 +1,16 @@
 /**
  * Sanguine CTA Banner block
- * Full-width red call-to-action strip with heading, description, and buttons.
+ * Full-width red call-to-action strip.
  *
  * Authoring: key-value table rows
- * Supported keys:
- *   heading, description, cta-primary, cta-secondary  (links in cells)
  *
  * @param {Element} block
  */
+import { moveInstrumentation } from '../../scripts/ue-utils.js';
+
 export default function decorate(block) {
+  if (block.hasAttribute('data-aue-resource')) block.setAttribute('data-aue-type', 'component');
+
   const kv = {};
   [...block.querySelectorAll(':scope > div')].forEach((row) => {
     const [keyCell, valueCell] = [...row.querySelectorAll(':scope > div')];
@@ -27,6 +29,7 @@ export default function decorate(block) {
     const h2 = document.createElement('h2');
     h2.className = 'scb-heading';
     h2.textContent = text('heading');
+    if (kv.heading) moveInstrumentation(kv.heading, h2);
     copyEl.append(h2);
   }
 
@@ -34,6 +37,7 @@ export default function decorate(block) {
     const desc = document.createElement('p');
     desc.className = 'scb-desc';
     desc.innerHTML = kv.description.innerHTML;
+    moveInstrumentation(kv.description, desc);
     copyEl.append(desc);
   }
 
@@ -47,6 +51,7 @@ export default function decorate(block) {
     btn.href = a.href;
     btn.textContent = a.textContent.trim();
     btn.className = i === 0 ? 'scb-btn scb-btn-white' : 'scb-btn scb-btn-ghost';
+    if (kv[key]) moveInstrumentation(kv[key], btn);
     actionsEl.append(btn);
   });
 

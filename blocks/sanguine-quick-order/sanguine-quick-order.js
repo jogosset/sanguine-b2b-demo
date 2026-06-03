@@ -9,10 +9,13 @@
  *
  * @param {Element} block
  */
+import { moveInstrumentation } from '../../scripts/ue-utils.js';
 
 const HEADER_KEYS = new Set(['title', 'subtitle']);
 
 export default function decorate(block) {
+  if (block.hasAttribute('data-aue-resource')) block.setAttribute('data-aue-type', 'component');
+
   const kv = {};
   const productRows = [];
 
@@ -20,7 +23,7 @@ export default function decorate(block) {
     const cells = [...row.querySelectorAll(':scope > div')];
     const key = cells[0]?.textContent?.trim().toLowerCase();
     if (cells.length === 2 && HEADER_KEYS.has(key)) {
-      kv[key] = cells[1];
+      kv[key] = { cell: cells[1], row };
     } else {
       productRows.push(row);
     }
@@ -35,21 +38,21 @@ export default function decorate(block) {
     if (kv.title) {
       const h2 = document.createElement('h2');
       h2.className = 'sqo-title';
-      h2.textContent = kv.title.textContent.trim();
+      h2.textContent = kv.title.cell.textContent.trim();
+      moveInstrumentation(kv.title.cell, h2);
       header.append(h2);
     }
     if (kv.subtitle) {
       const p = document.createElement('p');
       p.className = 'sqo-subtitle';
-      p.textContent = kv.subtitle.textContent.trim();
+      p.textContent = kv.subtitle.cell.textContent.trim();
+      moveInstrumentation(kv.subtitle.cell, p);
       header.append(p);
     }
     block.append(header);
   }
 
-  const rows = productRows;
-
-  rows.forEach((row) => {
+  productRows.forEach((row) => {
     const [iconCell, nameCell, availCell, priceCell] = [...row.querySelectorAll(':scope > div')];
 
     const icon = iconCell?.textContent?.trim() || '';
@@ -60,22 +63,30 @@ export default function decorate(block) {
 
     const item = document.createElement('div');
     item.className = 'sqo-row';
+    moveInstrumentation(row, item);
 
     const thumb = document.createElement('div');
     thumb.className = 'sqo-thumb';
     thumb.textContent = icon;
+    if (iconCell) moveInstrumentation(iconCell, thumb);
 
     const nameEl = document.createElement('div');
     nameEl.className = 'sqo-name-col';
     nameEl.innerHTML = `<span class="sqo-name">${productName || ''}</span>${sku ? `<span class="sqo-sku">${sku}</span>` : ''}`;
+    if (nameCell) moveInstrumentation(nameCell, nameEl);
 
     const availEl = document.createElement('div');
     availEl.className = 'sqo-avail';
     availEl.textContent = avail;
+    if (availCell) moveInstrumentation(availCell, availEl);
 
     const priceEl = document.createElement('div');
     priceEl.className = 'sqo-price';
     priceEl.textContent = price;
+    const priceUnitEl = document.createElement('span');
+    priceUnitEl.className = 'sqo-price__unit';
+    priceEl.append(priceUnitEl);
+    if (priceCell) moveInstrumentation(priceCell, priceEl);
 
     const btn = document.createElement('button');
     btn.className = 'sqo-btn';

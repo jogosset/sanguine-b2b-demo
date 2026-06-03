@@ -2,26 +2,16 @@
  * Sanguine Product Teaser block
  * Section header + filter bar + 3-column × N-row product card grid.
  *
- * Authoring — header key-value rows, then one product row per card:
- *
+ * Authoring — header key-value rows, then one product row per card (7+ cells):
  *   title     | Featured Products
  *   subtitle  | Top-ordered biospecimens...
  *   view-all  | [link: View full catalog →]
- *   filters   | All | Healthy Donors | Disease State | Autoimmune | Oncology | Rare Disease | In Stock
- *   🧬        | PBMCs | Crohn's Disease PBMCs — Cryopreserved | SNG-PBMC-CROHN-A | In Stock | ≥95% viability | ≥10×10⁶ cells | HLA-typed | Cryo | $380 / vial
- *
- * Product row cells:
- *   [0] emoji
- *   [1] category
- *   [2] name
- *   [3] sku
- *   [4] badge  ("In Stock", "Low Stock", "Best Seller", "GMP Grade", or pipe-combined "In Stock | Best Seller")
- *   [5..N-2] spec tags (one cell per spec)
- *   [N-1] price ("$380 / vial")
- *   [N] optional CTA label override (defaults to "Add to Cart")
+ *   filters   | All | Healthy Donors | ...
+ *   emoji | category | name | sku | badge | spec… | price | [optional CTA]
  *
  * @param {Element} block
  */
+import { moveInstrumentation } from '../../scripts/ue-utils.js';
 
 const HEADER_KEYS = new Set(['title', 'subtitle', 'view-all', 'filters']);
 
@@ -43,24 +33,27 @@ function buildHeader(kv) {
   if (kv.title) {
     const h2 = document.createElement('h2');
     h2.className = 'spt-title';
-    h2.textContent = kv.title.textContent.trim();
+    h2.textContent = kv.title.cell.textContent.trim();
+    moveInstrumentation(kv.title.cell, h2);
     textGroup.append(h2);
   }
   if (kv.subtitle) {
     const p = document.createElement('p');
     p.className = 'spt-subtitle';
-    p.textContent = kv.subtitle.textContent.trim();
+    p.textContent = kv.subtitle.cell.textContent.trim();
+    moveInstrumentation(kv.subtitle.cell, p);
     textGroup.append(p);
   }
   header.append(textGroup);
 
   if (kv['view-all']) {
-    const a = kv['view-all'].querySelector('a');
+    const a = kv['view-all'].cell.querySelector('a');
     if (a) {
       const btn = document.createElement('a');
       btn.href = a.href;
       btn.className = 'spt-view-all';
       btn.textContent = a.textContent.trim();
+      moveInstrumentation(kv['view-all'].cell, btn);
       header.append(btn);
     }
   }
@@ -100,23 +93,21 @@ function buildCard(cells) {
   const sku = cells[3]?.textContent?.trim() || '';
   const badgeRaw = cells[4]?.textContent?.trim() || '';
 
-  // Last cell is price (or 2nd-to-last if CTA override present)
-  // Cells 5..end-2 are specs, end-1 is price, end is optional CTA
   const last = cells.length - 1;
   const priceText = cells[last]?.textContent?.trim() || '';
-  const isCtaOverride = priceText && !priceText.startsWith('$') && !priceText.includes('€') && !priceText.includes('£');
+  const isCtaOverride = priceText && !priceText.startsWith('$') && !priceText.includes('€');
   const ctaLabel = isCtaOverride ? priceText : 'Add to Cart';
   const priceIdx = isCtaOverride ? last - 1 : last;
   const price = cells[priceIdx]?.textContent?.trim() || '';
   const specCells = cells.slice(5, priceIdx);
 
-  // --- Image area ---
   const imgArea = document.createElement('div');
   imgArea.className = 'spt-card-img';
 
   const emojiEl = document.createElement('span');
   emojiEl.className = 'spt-emoji';
   emojiEl.textContent = emoji;
+  if (cells[0]) moveInstrumentation(cells[0], emojiEl);
   imgArea.append(emojiEl);
 
   if (badgeRaw) {
@@ -128,10 +119,10 @@ function buildCard(cells) {
       el.textContent = badge;
       badgesEl.append(el);
     });
+    if (cells[4]) moveInstrumentation(cells[4], badgesEl);
     imgArea.append(badgesEl);
   }
 
-  // --- Body ---
   const body = document.createElement('div');
   body.className = 'spt-card-body';
 
@@ -139,18 +130,21 @@ function buildCard(cells) {
     const catEl = document.createElement('p');
     catEl.className = 'spt-category';
     catEl.textContent = category;
+    if (cells[1]) moveInstrumentation(cells[1], catEl);
     body.append(catEl);
   }
 
   const nameEl = document.createElement('h3');
   nameEl.className = 'spt-name';
   nameEl.textContent = name;
+  if (cells[2]) moveInstrumentation(cells[2], nameEl);
   body.append(nameEl);
 
   if (sku) {
     const skuEl = document.createElement('p');
     skuEl.className = 'spt-sku';
     skuEl.textContent = `SKU: ${sku}`;
+    if (cells[3]) moveInstrumentation(cells[3], skuEl);
     body.append(skuEl);
   }
 
@@ -163,13 +157,13 @@ function buildCard(cells) {
         const tag = document.createElement('span');
         tag.className = 'spt-spec';
         tag.textContent = specText;
+        moveInstrumentation(cell, tag);
         specs.append(tag);
       }
     });
     body.append(specs);
   }
 
-  // Price + CTA
   const footer = document.createElement('div');
   footer.className = 'spt-card-footer';
 
@@ -181,6 +175,7 @@ function buildCard(cells) {
   } else {
     priceEl.textContent = price;
   }
+  if (cells[priceIdx]) moveInstrumentation(cells[priceIdx], priceEl);
   footer.append(priceEl);
 
   const cta = document.createElement('button');
@@ -198,6 +193,8 @@ function buildCard(cells) {
 }
 
 export default function decorate(block) {
+  if (block.hasAttribute('data-aue-resource')) block.setAttribute('data-aue-type', 'component');
+
   const kv = {};
   const productRows = [];
 
@@ -205,7 +202,7 @@ export default function decorate(block) {
     const cells = [...row.querySelectorAll(':scope > div')];
     const key = cells[0]?.textContent?.trim().toLowerCase();
     if (cells.length === 2 && HEADER_KEYS.has(key)) {
-      kv[key] = cells[1];
+      kv[key] = { cell: cells[1], row };
     } else if (cells.length >= 7) {
       productRows.push(cells);
     }
@@ -215,7 +212,7 @@ export default function decorate(block) {
 
   if (kv.title || kv.subtitle || kv['view-all']) block.append(buildHeader(kv));
   if (kv.filters) {
-    const bar = buildFilters(kv.filters);
+    const bar = buildFilters(kv.filters.cell);
     if (bar) block.append(bar);
   }
 
