@@ -1,0 +1,97 @@
+/* ============================================================
+   Biospecimens Nav
+   Horizontal category nav bar for Sanguine Bio product pages.
+   ============================================================ */
+
+.biospecimens-nav {
+  --bn-navy: #06038d;
+  --bn-orange: #ea6e40;
+  --bn-border: #e2e8f0;
+
+  width: 100%;
+  background: #fff;
+  border-bottom: 2px solid var(--bn-border);
+  margin-bottom: 2rem;
+}
+
+.biospecimens-nav .bn-bar {
+  max-width: var(--grid-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 var(--spacing-medium, 1.5rem);
+}
+
+.biospecimens-nav .bn-bar ul {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.biospecimens-nav .bn-bar ul::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- All links --- */
+.biospecimens-nav .bn-bar a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #4a4a6a;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.biospecimens-nav .bn-bar a:hover {
+  color: var(--bn-navy);
+  border-bottom-color: rgb(6 3 141 / 30%);
+}
+
+.biospecimens-nav .bn-bar a.active {
+  color: var(--bn-navy);
+  border-bottom-color: var(--bn-orange);
+  font-weight: 600;
+}
+
+/* --- Parent category (first item) --- */
+.biospecimens-nav .bn-bar li.bn-parent {
+  position: relative;
+}
+
+.biospecimens-nav .bn-bar li.bn-parent a {
+  font-weight: 700;
+  color: var(--bn-navy);
+  padding-right: 1.5rem;
+}
+
+.biospecimens-nav .bn-bar li.bn-parent::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1.5px;
+  background: var(--bn-border);
+}
+
+.biospecimens-nav .bn-bar li.bn-parent a:hover,
+.biospecimens-nav .bn-bar li.bn-parent a.active {
+  color: var(--bn-navy);
+  border-bottom-color: var(--bn-navy);
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .biospecimens-nav .bn-bar a {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+}
