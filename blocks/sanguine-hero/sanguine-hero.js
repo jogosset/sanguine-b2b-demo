@@ -1,7 +1,7 @@
 /**
  * Sanguine Hero block
  * Full-bleed dark hero with heading, description, dual CTAs, stat strip,
- * and a 2×2 live-data card grid.
+ * and a 2x2 live-data card grid.
  *
  * Authoring: key-value table rows (first cell = key, second = value)
  *
@@ -111,6 +111,16 @@ export default function decorate(block) {
   // --- Assemble ---
   block.innerHTML = '';
   if (block.hasAttribute('data-aue-resource')) block.setAttribute('data-aue-type', 'component');
+
+  // --- Background image layer ---
+  const bgPicture = kv['background-image']?.querySelector('picture');
+  if (bgPicture) {
+    const bg = document.createElement('div');
+    bg.className = 'sh-bg';
+    if (kv['background-image']) moveInstrumentation(kv['background-image'], bg);
+    bg.append(bgPicture);
+    block.append(bg);
+  }
 
   block.append(content);
 
