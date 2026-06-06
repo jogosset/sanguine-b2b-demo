@@ -5,8 +5,8 @@
   "offset": 0,
   "data": [
     {
-      "path": "/products/:urlkey/:sku",
-      "page": "/products/default"
+      "from": "/products/**",
+      "to": "/products/default"
     }
   ]
 }
