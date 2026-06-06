@@ -1,0 +1,12 @@
+{
+  ":type": "sheet",
+  "total": 1,
+  "limit": 100,
+  "offset": 0,
+  "data": [
+    {
+      "path": "/products/:urlkey/:sku",
+      "page": "/products/default"
+    }
+  ]
+}
