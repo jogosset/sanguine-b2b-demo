@@ -43,7 +43,8 @@ export default async function decorate(block) {
       }
 
       // Skip if the user is not an admin and permission is not granted
-      if (!permissions.admin && !permissions[permission]) {
+      // 'all' means show for any authenticated user
+      if (permission !== 'all' && !permissions.admin && !permissions[permission]) {
         return;
       }
 
