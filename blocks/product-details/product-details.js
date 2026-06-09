@@ -125,6 +125,7 @@ export default async function decorate(block) {
         <div class="product-details__price"></div>
         <div class="product-details__gallery"></div>
         <div class="product-details__short-description"></div>
+        <div class="product-details__inventory"></div>
         <div class="product-details__gift-card-options"></div>
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
@@ -148,6 +149,7 @@ export default async function decorate(block) {
   const $price = fragment.querySelector('.product-details__price');
   const $galleryMobile = fragment.querySelector('.product-details__right-column .product-details__gallery');
   const $shortDescription = fragment.querySelector('.product-details__short-description');
+  const $inventory = fragment.querySelector('.product-details__inventory');
   const $options = fragment.querySelector('.product-details__options');
   const $quantity = fragment.querySelector('.product-details__quantity');
   const $giftCardOptions = fragment.querySelector('.product-details__gift-card-options');
@@ -159,6 +161,34 @@ export default async function decorate(block) {
   const $gridOrderingContainer = fragment.querySelector('.product-details__grid-ordering');
 
   block.replaceChildren(fragment);
+
+  // Inventory display: fetch salable quantity from static inventory.json
+  (async () => {
+    if (!product?.sku || !$inventory) return;
+    try {
+      const resp = await fetch('/inventory.json');
+      if (!resp.ok) return;
+      const inventoryMap = await resp.json();
+      const sku = product.sku.toUpperCase();
+      const qty = inventoryMap[sku];
+      if (qty === undefined) return;
+      const isLow = qty < 3;
+      $inventory.innerHTML = '';
+      const row = document.createElement('div');
+      row.className = 'product-details__inventory-row';
+      const label = document.createElement('span');
+      label.className = 'product-details__inventory-label';
+      label.textContent = 'Quantity Available: ';
+      const value = document.createElement('span');
+      value.className = 'product-details__inventory-value' + (isLow ? ' product-details__inventory-value--low' : '');
+      value.textContent = isLow ? `⚠ Low Inventory (${qty} remaining)` : qty;
+      row.appendChild(label);
+      row.appendChild(value);
+      $inventory.appendChild(row);
+    } catch (e) {
+      // silently fail — inventory is informational only
+    }
+  })();
 
   const gallerySlots = {
     CarouselThumbnail: (ctx) => {
