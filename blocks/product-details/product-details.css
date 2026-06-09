@@ -134,14 +134,15 @@
     grid-column: 1 / span 2;
   }
 }
-.product-details__inventory {
-margin: 0.5rem 0;
-font-size: var(--type-body-1-size, 0.875rem);
-line-height: var(--type-body-1-line-height, 1.5);
-color: var(--color-neutral-800, #2c2c2c);
 }
 
 .product-details__inventory-value--low {
 color: var(--color-alert-error, #d7373f);
 font-weight: 600;
-}
+}/.product-details__inventory {
+margin: 0.5rem 0;
+font-size: 1.05rem;
+line-height: var(--type-body-1-line-height, 1.5);
+color: var(--color-neutral-800, #2c2c2c);
+font-weight: 700;
+}}
