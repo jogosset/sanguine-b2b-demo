@@ -11,10 +11,19 @@ import { FetchGraphQL } from '@dropins/tools/fetch-graphql.js';
 import {
   getMetadata,
   readBlockConfig,
-  toCamelCase,
-  toClassName,
 } from './aem.js';
 import initializeDropins from './initializers/index.js';
+
+let consentGranted = false;
+
+/** Returns the latest upstream consent notification for this document. */
+export function isConsentGranted() {
+  return consentGranted;
+}
+
+window.addEventListener('consent.update', ({ detail }) => {
+  consentGranted = detail?.consented === true;
+});
 
 /**
  * Sanitizes the given string by:
@@ -282,9 +291,85 @@ export async function fetchIndex(indexFile, pageSize = 500) {
 /**
  * Loads commerce-specific eager content
  */
+/**
+ * Demo Builder: a loading skeleton for the product page. The product-details
+ * section stays hidden until the product data has loaded, so this draws the
+ * drop-in Skeleton in that block's own layout just before the section, and
+ * removes it once the section is shown.
+ */
+async function showProductSkeleton() {
+  const section = document.querySelector('main .product-details')?.closest('.section');
+  if (!section) return;
+  const [{ Skeleton, SkeletonRow, provider: UI }, { h }] = await Promise.all([
+    import('@dropins/tools/components.js'),
+    import('@dropins/tools/preact.js'),
+  ]);
+  // One row per wrapper: a global drop-in rule hides a skeleton row after the
+  // first among its siblings on small screens.
+  const row = (props, className) => h('div', {
+    className,
+    children: h(SkeletonRow, { fullWidth: true, ...props }),
+  });
+  const image = { style: { height: 'auto', aspectRatio: '960 / 1191', maxHeight: '60vh' } };
+  const placeholder = document.createElement('div');
+  placeholder.className = 'product-details-skeleton';
+  placeholder.style.margin = '0 0 var(--spacing-xbig)';
+  const inner = document.createElement('div');
+  Object.assign(inner.style, { maxWidth: '1200px', margin: 'auto', padding: '0 var(--spacing-big)' });
+  placeholder.append(inner);
+  section.before(placeholder);
+  await UI.render(Skeleton, {
+    className: 'product-details__wrapper',
+    children: [
+      h('div', {
+        className: 'product-details__left-column',
+        children: row(image),
+      }),
+      h('div', {
+        className: 'product-details__right-column',
+        style: { display: 'grid', gap: 'var(--spacing-medium)', alignContent: 'start' },
+        children: [
+          row({ variant: 'heading', size: 'xlarge' }),
+          row({ variant: 'heading', size: 'medium', style: { width: '40%' } }),
+          // The block shows its gallery here on small screens only, by this class.
+          row(image, 'product-details__gallery'),
+          row({ size: 'medium' }),
+          row({ size: 'medium' }),
+          row({ size: 'small', style: { width: '30%' } }),
+          row({ size: 'large' }),
+        ],
+      }),
+    ],
+  })(inner);
+  const removeOnceShown = () => {
+    if (section.dataset.sectionStatus !== 'loaded') return false;
+    placeholder.remove();
+    return true;
+  };
+  if (removeOnceShown()) return;
+  const observer = new MutationObserver(() => {
+    if (removeOnceShown()) observer.disconnect();
+  });
+  observer.observe(section, { attributes: true, attributeFilter: ['data-section-status'] });
+}
+
 export async function loadCommerceEager() {
   const pageType = detectPageType();
   initializeAdobeDataLayer(pageType);
+
+  // Demo Builder: a product page no longer stays blank while its data loads.
+  // The product is fetched while a skeleton shows; the product-details block
+  // replaces it, and the page is told it is ready once the data is in.
+  if (pageType === 'Product') {
+    const productReady = handleCommercePageType(pageType);
+    await showProductSkeleton().catch((e) => console.warn('Product skeleton not shown:', e));
+    productReady.then(() => notifyUI('lcp'), (e) => {
+      console.error('Error initializing commerce configuration:', e);
+      loadErrorPage(418);
+    });
+    return;
+  }
+
   await handleCommercePageType(pageType);
 
   // notify that the page is ready for eager loading
@@ -341,7 +426,6 @@ export async function loadCommerceLazy() {
   // Initialize Adobe Client Data Layer
   await import('./acdl/adobe-client-data-layer.min.js');
 
-  // Track history
   trackHistory();
 }
 
@@ -476,7 +560,9 @@ export async function fetchPlaceholders(path) {
       }
 
       // Create new fetch promise
-      const resourceFetchPromise = fetch(`${url}?sheet=data`).then(async (response) => {
+      // Use force-cache to serve any available cache entry without revalidation,
+      // reducing CDN traffic for static localization assets past their max-age.
+      const resourceFetchPromise = fetch(`${url}?sheet=data`, { cache: 'force-cache' }).then(async (response) => {
         if (response.ok) {
           const data = await response.json();
           // Cache the response
@@ -695,6 +781,32 @@ export function isProductTemplate() {
   });
 }
 
+/**
+ * Renders promotion/discount rule labels for a cart item, keeping them in sync
+ * as the item's data changes. Used by the cart, mini-cart, and checkout
+ * order-summary line items, which all share the same dropin cart-item context.
+ * @param {Object} ctx - The dropin cart-item Footer slot context
+ * @returns {HTMLElement} The promotions wrapper element
+ */
+export function renderCartItemPromotions(ctx) {
+  const promotionsWrapper = document.createElement('div');
+  promotionsWrapper.className = 'cart-item-promotions';
+
+  ctx.onChange((next) => {
+    promotionsWrapper.innerHTML = '';
+    next.item?.discount?.label?.forEach((label) => {
+      const promoDiv = document.createElement('div');
+      promoDiv.className = 'cart-item-promotion-label';
+      promoDiv.textContent = label;
+      promotionsWrapper.appendChild(promoDiv);
+    });
+  });
+
+  ctx.appendChild(promotionsWrapper);
+
+  return promotionsWrapper;
+}
+
 export function getProductLink(urlKey, sku) {
   if (!urlKey) {
     console.warn('getProductLink: urlKey is missing or empty', { urlKey, sku });
@@ -728,38 +840,70 @@ export function getOptionsUIDsFromUrl() {
 }
 
 /**
+ * Determines the store identifier for tracking history based on configuration headers.
+ * @returns {string|undefined} Store identifier based on header values or undefined.
+ */
+export function getStoreIdentifier() {
+  const headers = getHeaders('cs');
+  const saasStoreIdentifier = 'magento-store-view-code';
+  const acoStoreIdentifier = 'ac-view-id';
+  const storeIdentifierKey = Object.keys(headers).find(
+    (key) => [saasStoreIdentifier, acoStoreIdentifier].includes(key.toLowerCase()),
+  );
+  const storeIdentifier = storeIdentifierKey ? headers[storeIdentifierKey] : undefined;
+  if (!storeIdentifier) {
+    console.warn('No store view code found in config headers for tracking history');
+    return undefined;
+  }
+  return storeIdentifier;
+}
+
+/**
  * Tracks user browsing and purchase history for recommendations.
  * Stores product view history and purchase history in localStorage.
  */
+let historyTrackingInitialized = false;
+
 function trackHistory() {
-  if (!getConsent('commerce-recommendations')) {
+  if (historyTrackingInitialized) {
     return;
   }
-  // Store product view history in session storage
-  const storeViewCode = getConfigValue('headers.cs.Magento-Store-View-Code');
-  window.adobeDataLayer.push((dl) => {
-    dl.addEventListener('adobeDataLayer:change', (event) => {
-      if (!event.productContext || !event.productContext.sku) {
-        return;
-      }
-      const key = `${storeViewCode}:productViewHistory`;
-      let viewHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
-      viewHistory = viewHistory.filter((item) => item.sku !== event.productContext.sku);
-      viewHistory.push({ date: new Date().toISOString(), sku: event.productContext.sku });
-      window.localStorage.setItem(key, JSON.stringify(viewHistory.slice(-20)));
-    }, { path: 'productContext' });
-    dl.addEventListener('place-order', () => {
-      const shoppingCartContext = dl.getState('shoppingCartContext');
-      if (!shoppingCartContext) {
-        return;
-      }
-      const key = `${storeViewCode}:purchaseHistory`;
-      const purchasedProducts = shoppingCartContext.items.map((item) => item.product.sku);
-      const purchaseHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
-      purchaseHistory.push({ date: new Date().toISOString(), items: purchasedProducts });
-      window.localStorage.setItem(key, JSON.stringify(purchaseHistory.slice(-5)));
+  const storeIdentifier = getStoreIdentifier();
+  if (storeIdentifier) {
+    historyTrackingInitialized = true;
+    window.adobeDataLayer.push((dl) => {
+      const recordProductView = (event) => {
+        // Speculation Rules prerendering pushes productContext once immediately and
+        // again on activation. Ignore the prerender-only push so hovering a link
+        // doesn't record a view that never actually happened.
+        if (document.prerendering || !event.productContext || !event.productContext.sku) {
+          return;
+        }
+        const key = `${storeIdentifier}:productViewHistory`;
+        let viewHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
+        viewHistory = viewHistory.filter((item) => item.sku !== event.productContext.sku);
+        viewHistory.push({ date: new Date().toISOString(), sku: event.productContext.sku });
+        window.localStorage.setItem(key, JSON.stringify(viewHistory.slice(-20)));
+      };
+      dl.addEventListener('adobeDataLayer:change', recordProductView, {
+        path: 'productContext',
+      });
+      dl.addEventListener('place-order', () => {
+        if (document.prerendering) {
+          return;
+        }
+        const shoppingCartContext = dl.getState('shoppingCartContext');
+        if (!shoppingCartContext) {
+          return;
+        }
+        const key = `${storeIdentifier}:purchaseHistory`;
+        const purchasedProducts = shoppingCartContext.items.map((item) => item.product.sku);
+        const purchaseHistory = JSON.parse(window.localStorage.getItem(key) || '[]');
+        purchaseHistory.push({ date: new Date().toISOString(), items: purchasedProducts });
+        window.localStorage.setItem(key, JSON.stringify(purchaseHistory.slice(-20)));
+      });
     });
-  });
+  }
 }
 
 /**
@@ -835,16 +979,6 @@ export function checkIsAuthenticated() {
 }
 
 /**
- * Check if consent was given for a specific topic.
- * @param {*} topic Topic identifier
- * @returns {boolean} True if consent was given
- */
-export function getConsent(_topic) {
-  console.warn('getConsent not implemented');
-  return true;
-}
-
-/**
  * Automatically links modal functionality to elements
  * @param {Element} element - The element to attach modal functionality to
  */
@@ -889,23 +1023,5 @@ export function decorateSections(main) {
     section.classList.add('section');
     section.dataset.sectionStatus = 'initialized';
     section.style.display = 'none';
-
-    // Process section metadata
-    const sectionMeta = section.querySelector('div.section-metadata');
-    if (sectionMeta) {
-      const meta = readBlockConfig(sectionMeta);
-      Object.keys(meta).forEach((key) => {
-        if (key === 'style') {
-          const styles = meta.style
-            .split(',')
-            .filter((style) => style)
-            .map((style) => toClassName(style.trim()));
-          styles.forEach((style) => section.classList.add(style));
-        } else {
-          section.dataset[toCamelCase(key)] = meta[key];
-        }
-      });
-      sectionMeta.parentNode.remove();
-    }
   });
 }

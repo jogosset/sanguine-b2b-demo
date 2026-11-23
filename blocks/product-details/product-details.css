@@ -106,7 +106,7 @@
     display: block;
     grid-column: 1 / span 6;
   }
-  
+
   .product-details__right-column {
     grid-column: 7 / span 5;
     padding-top: var(--spacing-medium);
@@ -134,15 +134,15 @@
     grid-column: 1 / span 2;
   }
 }
-}
 
-.product-details__inventory-value--low {
-color: var(--color-alert-error, #d7373f);
-font-weight: 600;
-}/.product-details__inventory {
-margin: 0.5rem 0;
-font-size: 1.05rem;
-line-height: var(--type-body-1-line-height, 1.5);
-color: var(--color-neutral-800, #2c2c2c);
-font-weight: 700;
-}}
+.product-details__add-to-cart-status {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
